@@ -1,19 +1,25 @@
 Extending FancyBox to give BlockUI JQuery Plugin functionalities
 
 
-Fancybox is an excellent plugin that provides Lightbox type functionality on your website using JQuery. I love this Plugin since it provides greater control than any other similar tools. You can display almost anything in lightbox fashion yet have excellent control on how everything is done.
+Fancybox is an excellent plugin that provides Lightbox type functionality on your website using JQuery. 
+I love this Plugin since it provides greater control than any other similar tools. You can display almost 
+anything in lightbox fashion yet have excellent control on how everything is done.
 
-However, sometime you just need to block UI while you are doing something showing a Progress animation or just need to show simple prompt. BlockUI is one such great JQuery plugin that does exact this. Although you could use this to show simple Text messages but main goal here is to block the screen with an overlay while you are doing something in the background or you need a feedback from user.
+However, sometime you just need to block UI while you are doing something showing a Progress animation or 
+just need to show simple prompt. BlockUI is one such great JQuery plugin that does exact this. Although you 
+could use this to show simple Text messages but main goal here is to block the screen with an overlay while 
+you are doing something in the background or you need a feedback from user.
 
-I wanted to use Fancybox but have the BlockUI functionality on it. This can be easily achieved by using onStart, onClose callbacks. Fancybox already comes with an default progress animation that could be used as well. Having Fancybox doing the BlockUI functionalities  allows not to load an extra javascript. Moreover both Plugin adds extra HTML code on the page as well for almost same purpose which seems to be overkill to me. So, I have written a simple Plugin that extends the functionality of Fancybox with two new functions blockUI and unlockUI.
-
-
-
+I wanted to use Fancybox but have the BlockUI functionality on it. This can be easily achieved by using onStart, 
+onClose callbacks. Fancybox already comes with an default progress animation that could be used as well. 
+Having Fancybox doing the BlockUI functionalities  allows not to load an extra javascript. 
+Moreover both Plugin adds extra HTML code on the page as well for almost same purpose which seems to be overkill to me. 
+So, I have written a simple Plugin that extends the functionality of Fancybox with two new functions blockUI and unlockUI.
 
 
 
 How to Load:
-
+~~~~~~~~~~~~
 
 I have tested the plugin on fancybox v1.3.4. Load the plugin after Fancybox. example:
 
@@ -25,7 +31,7 @@ I have tested the plugin on fancybox v1.3.4. Load the plugin after Fancybox. exa
 
 
 Default Usage:
-
+~~~~~~~~~~~~~~
 
 $fancybox.blockUI();
 
@@ -44,7 +50,7 @@ hides the Blocked overlay
 
 
 Extended usage with parameters:
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $fancybox.blockUI(param)
 
@@ -61,10 +67,11 @@ All standard fancy box parameters could be passed to override the defaul values 
 
 Three new Key/value has been introduced to give some new behavior related to blockUI
 
-Key  Default value	Description
-scrollToTop	false	scroll the window to top before showing the overlay. This is exactly same as window.parent.scroll(0,0);
-timeout	false	hides the overlay after given time in milliseconds. 
-hideProgressImage	false	hides the default progress animation
+Key               Default value	  Description
+scrollToTop	      false	          scroll the window to top before showing the overlay. 
+                                  This is exactly same as window.parent.scroll(0,0);
+timeout	          false	          hides the overlay after given time in milliseconds. 
+hideProgressImage	false	          hides the default progress animation
 
 
 
@@ -74,13 +81,13 @@ hideProgressImage	false	hides the default progress animation
 
 
 Plugins mentioned
-
+~~~~~~~~~~~~~~~~~
 
 1. Fancybox : http://fancybox.net
 2. BlockUI : http://jquery.malsup.com/block
 
 
 Download fancybox.blockui plugin from github
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 https://github.com/rezaulkabir/fancybox.blockui
