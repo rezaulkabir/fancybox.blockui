@@ -149,14 +149,14 @@ Extended usage with parameters:
 										'transitionOut'		: 'none',
 										'centerOnScroll'	: true,
 										'enableEscapeButton': false
-									}
+									};
 									
 									var fixedParams = {
 									
 										'onStart'			: fancyboxBlockUI.onStart,
 										'onComplete'		: fancyboxBlockUI.onComplete,
 										'onClosed'			: fancyboxBlockUI.onClosed
-									}
+									};
 									
 									$.extend(defaults, params, fixedParams);
 									
