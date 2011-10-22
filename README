@@ -67,14 +67,11 @@ All standard fancy box parameters could be passed to override the defaul values 
 
 Three new Key/value has been introduced to give some new behavior related to blockUI
 
-Key               Default value	  Description
-scrollToTop	      false	          scroll the window to top before showing the overlay. 
-                                  This is exactly same as window.parent.scroll(0,0);
-timeout	          false	          hides the overlay after given time in milliseconds. 
-hideProgressImage	false	          hides the default progress animation
-
-
-
+Key                               Default value                     Description
+scrollToTop                       false                             scroll the window to top before showing the overlay.                                                                                                                                         
+                                                                    This is exactly same as window.parent.scroll(0,0);
+timeout                           false                             hides the overlay after given time in milliseconds. 
+hideProgressImage                 false                             hides the default progress animation
 
 
 
