@@ -1,5 +1,5 @@
 Extending FancyBox to give BlockUI JQuery Plugin functionalities
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Fancybox is an excellent plugin that provides Lightbox type functionality on your website using JQuery. 
 I love this Plugin since it provides greater control than any other similar tools. You can display almost 
@@ -24,7 +24,7 @@ How to Load:
 I have tested the plugin on fancybox v1.3.4. Load the plugin after Fancybox. example:
 
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js&quot; />  
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" />  
 <script type="text/javascript" src="../fancybox/jquery.fancybox-1.3.4.pack.js"/> 
 <script type="text/javascript" src="jquery.fancybox.blockui_1.1.0.js"/> 
 
