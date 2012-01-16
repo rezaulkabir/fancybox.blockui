@@ -1,6 +1,6 @@
 /*
-jquery.fancybox.blockui()	:	version	: 1.1.0
-							:	date	: 06-Oct-2011
+jquery.fancybox.blockui()	:	version	: 1.1.1
+							:	date	: 16-Jan-2012
 							: 	author	: Rezaul Kabir
 							:	email	: rezaul.kabir@gmail.com
 							
@@ -10,10 +10,13 @@ This plugin extends fancybox (http://fancybox.net) with UI block and unblock fun
 release history	:
 v 1.0			: 	first release
 v.1.0.1			: 	fixed an issue where if you clicked on the Activity image it would disappeare. 
-v.1.1.0			: 	removed previous callback and utilized fancybox callbacks. Now all fancybox callbacks could be used. 
+v.1.1.0	(date: 06-Oct-2011)		
+				: 	removed previous callback and utilized fancybox callbacks. Now all fancybox callbacks could be used. 
 					Renamed the custom parameter names
 					solved issue when Activity image is clicked and hideOnOverlayClick is true.
-
+v.1.1.1	(date: 16-Jan-2012)		
+				: fixed a bug regarding the content. the m_fancyboxContent was declared but I was using fancyboxContent var which does not exist
+				  added feature to show html content as a message
 
 How to Load:
 
@@ -37,6 +40,7 @@ Extended usage with parameters:
 							 hideOnOverlayClick. parameter object is {hideOnOverlayClick: false}
 	
 							All standard fancy box parameters could be passed to override the defaul values. 
+							However, the functions onStart, onComplete, onCleanup, onClosed cannot be overridden. 
 	
 	scrollToTop:			boolean. Before showing the UI overlay, window will be scrolled to top. this is just a simple call to
 							window.parent.scroll(0,0)
@@ -68,11 +72,11 @@ Extended usage with parameters:
 					timeoutId: null,
 					timeout: false,
 					scrolToTop: false,
-					hideProgressImage: false,
+					m_hideActivity: false,
 					m_onClosed: false,
 					m_onComplete: false,
 					m_onStart: false,
-					m_fancyboxContent:'<div></div>', 
+					fancyboxContent:'<div></div>', 
 					onStart: function(scrollToTop, timeout) {
 				
 									//console.log('onStart');
@@ -82,18 +86,23 @@ Extended usage with parameters:
 										fancyboxBlockUI.timeoutId = window.setTimeout(function(){$.fancybox.close();}, fancyboxBlockUI.timeout);
 									}
 
-									if (fancyboxBlockUI.m_onStart)																																fancyboxBlockUI.m_onStart();
-
+									if (typeof fancyboxBlockUI.m_onStart == 'function') {
+									
+										fancyboxBlockUI.m_onStart();
+									}	
 					},
 					onComplete: function() {
 
 									//console.log('onComplete');
 
-									if (!fancyboxBlockUI.hideProgressImage) 
+									if (!fancyboxBlockUI.m_hideActivity) 
 										$.fancybox.showActivity();
 
-									if (fancyboxBlockUI.m_onComplete)																																fancyboxBlockUI.m_onComplete();
-
+									if (typeof fancyboxBlockUI.m_onComplete == 'function') {
+											
+										fancyboxBlockUI.m_onComplete();		
+									}	
+	
 					},
 					onClosed: function() {
 					
@@ -106,7 +115,10 @@ Extended usage with parameters:
 									if (fancyboxBlockUI.timeoutId) 
 										window.clearTimeout (fancyboxBlockUI.timeoutId);
 					
-									if (fancyboxBlockUI.m_onClosed)																																fancyboxBlockUI.m_onClosed();
+									if (typeof fancyboxBlockUI.m_onClosed == 'function') {
+									
+										fancyboxBlockUI.m_onClosed();	
+									}
 					},
 					validateDataType: function(func, datatype){
 									
@@ -118,25 +130,6 @@ Extended usage with parameters:
 									params = (params)?params:{};
 									if (typeof params != 'object') params = {};
 
-									
-									fancyboxBlockUI.m_onClosed 		= this.validateDataType(params.onClosed, 'function');
-									fancyboxBlockUI.m_onComplete	= this.validateDataType(params.onComplete, 'function');
-									fancyboxBlockUI.m_onStart 		= this.validateDataType(params.onStart, 'function');
-									
-									fancyboxBlockUI.hideProgressImage 	= this.validateDataType(params.hideProgressImage, 'boolean'); 
-									fancyboxBlockUI.scrollToTop		= this.validateDataType(params.scrollToTop, 'boolean'); 
-
-									fancyboxBlockUI.timeout 		= this.validateDataType(params.timeout, 'number');
-									
-	 								fancyboxBlockUI.fancyboxContent = (params.fancyboxContent)?params.fancyboxContent:fancyboxBlockUI.fancyboxContent;
-	 								
-									delete params.hideProgressImage;
-									delete params.timeout;
-									delete params.scrollToTop;
-									delete params.fancyboxContent;
-									 
-									
-									// can be overridden by user
 									var defaults = {
 
 							       		'autoDimensions'	: false,
@@ -149,25 +142,71 @@ Extended usage with parameters:
 										'transitionIn'		: 'none',
 										'transitionOut'		: 'none',
 										'centerOnScroll'	: true,
-										'enableEscapeButton': false
-									};
+										'enableEscapeButton': false,
+
+										'onClosed'			: null,
+										'onComplete'		: null,
+										'onStart'			: null,
+										
+										'hideActivity'		: false,
+										'scrollToTop'		: false,
+										'timeout'			: false,
+										'fancyboxContent'	: false
+										
+										
+									}
 									
+									$.extend(defaults, params);
+									
+									fancyboxBlockUI.m_onClosed 		= this.validateDataType(defaults.onClosed, 'function');
+									fancyboxBlockUI.m_onComplete	= this.validateDataType(defaults.onComplete, 'function');
+									fancyboxBlockUI.m_onStart 		= this.validateDataType(defaults.onStart, 'function');
+									
+									fancyboxBlockUI.m_hideActivity 	= this.validateDataType(defaults.hideActivity, 'boolean'); 
+									fancyboxBlockUI.scrollToTop		= this.validateDataType(defaults.scrollToTop, 'boolean'); 
+									fancyboxBlockUI.timeout 		= this.validateDataType(defaults.timeout, 'number');
+	 								fancyboxBlockUI.fancyboxContent = defaults.fancyboxContent;
+	 								
+									// remove items that fancybox does not recognize - a precausion 
+									delete defaults.hideActivity;
+									delete defaults.timeout;
+									delete defaults.scrollToTop;
+									delete defaults.fancyboxContent;
+									
+
+									
+									// bring control back to this plugin. 
 									var fixedParams = {
 									
-										'onStart'			: fancyboxBlockUI.onStart,
-										'onComplete'		: fancyboxBlockUI.onComplete,
-										'onClosed'			: fancyboxBlockUI.onClosed
+										'onStart'			: this.onStart,
+										'onComplete'		: this.onComplete,
+										'onClosed'			: this.onClosed
 									};
 									
-									$.extend(defaults, params, fixedParams);
+									$.extend(defaults, fixedParams);									
 									
-									$('#fancybox-outer').hide();
+									if (!fancyboxBlockUI.fancyboxContent) {
+										
+										$('#fancybox-outer').hide();
+										
+									} else {
+										
+										// hide activity animation if hideActivity param is not explicitly defined for showing html content
+										if (typeof params.hideActivity != 'boolean') {
+										
+											fancyboxBlockUI.m_hideActivity = true;
+										}
+										
+										$('#fancybox-outer').show();
+									
+									}
+									
+									// stop closing ovelay when user clicks on atvity animation 
 									$('#fancybox-loading').click(function(){
 									
-										//console.log('fancybox-loading click event');
 										$('#fancybox-loading').css('display','block');
 									});
-
+									//alert(fancyboxBlockUI.fancyboxContent);
 									$.fancybox(fancyboxBlockUI.fancyboxContent, defaults); // div added to force inline type for safety reasons
 					
 					}, // end blockUI

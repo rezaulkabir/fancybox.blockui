@@ -71,8 +71,8 @@ Key                               Default value                Description
 scrollToTop                       false                        scroll the window to top before showing the overlay.                                                                                                                                         
                                                                This is exactly same as window.parent.scroll(0,0);
 timeout                           false                        hides the overlay after given time in milliseconds. 
-hideProgressImage                 false                        hides the default progress animation
-
+hideActivity	                 false                        hides the default progress animation
+fancyboxContent					none							html content to be shown in a box
 
 
 
