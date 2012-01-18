@@ -97,12 +97,9 @@ Extended usage with parameters:
 										fancyboxBlockUI.timeoutId = window.setTimeout(function(){$.fancybox.close();}, fancyboxBlockUI.timeout);
 									}
 									
+									
 									//console.log('onStart');
 									if (fancyboxBlockUI.scrollToTop) window.parent.scroll(0,0);
-									
-									fancyboxBlockUI.m_originalBorderColor = $('#fancybox-content').css('border-color');
-									fancyboxBlockUI.m_originalbackgroundColor = $('#fancybox-outer').css('background-color');
-
 
 									if (typeof fancyboxBlockUI.m_onStart == 'function') {
 									
@@ -113,8 +110,6 @@ Extended usage with parameters:
 
 									//console.log('onComplete');
 									
-									$('#fancybox-content').css('border-color', fancyboxBlockUI.m_borderColor);
-									$('#fancybox-outer').css('background-color', fancyboxBlockUI.m_backgroundColor);
 
 									if (!fancyboxBlockUI.m_hideActivity) 
 										$.fancybox.showActivity();
@@ -127,13 +122,15 @@ Extended usage with parameters:
 					},
 					onClosed: function() {
 					
+									console.log('[onClosed]');
 									$.fancybox.hideActivity();
 
 									if (fancyboxBlockUI.timeoutId) {
 									
 										window.clearTimeout (fancyboxBlockUI.timeoutId);
 									}	
-																		
+									
+									//console.log(fancyboxBlockUI.m_originalBorderColor + ':' + fancyboxBlockUI.m_originalbackgroundColor);							
 									$('#fancybox-content').css('border-color', fancyboxBlockUI.m_originalBorderColor);
 									$('#fancybox-outer').css('background-color', fancyboxBlockUI.m_originalbackgroundColor);
 									$('#fancybox-outer').show();
@@ -158,14 +155,12 @@ Extended usage with parameters:
 							       		'autoDimensions'	: false,
 										'height'     		: 'none',
 										'width'				: 'none',
-										'transitionIn'		: 'none',
-										'transitionOut'		: 'none',
+										//'transitionIn'		: 'none',
+										//'transitionOut'		: 'none',
 										'hideOnContentClick': false,
 										'hideOnOverlayClick': true,
-										'transitionIn'		: 'none',
-										'transitionOut'		: 'none',
 										'centerOnScroll'	: true,
-										'enableEscapeButton': false,
+										'enableEscapeButton': true,
 
 										'onClosed'			: null,
 										'onComplete'		: null,
@@ -224,7 +219,7 @@ Extended usage with parameters:
 									}
 									
 									
-									console.log('html:' + fancyboxBlockUI.m_html);
+									console.log('[blockUI] html:' + fancyboxBlockUI.m_html);
 									if (!fancyboxBlockUI.m_html) {
 										
 										$('#fancybox-outer').hide();
@@ -253,6 +248,14 @@ Extended usage with parameters:
 									delete defaults.borderColor;
 									delete defaults.messageType;
 									
+
+									console.log('[blockUI] show');
+									fancyboxBlockUI.m_originalBorderColor = $('#fancybox-content').css('border-color');
+									fancyboxBlockUI.m_originalbackgroundColor = $('#fancybox-outer').css('background-color');
+
+									$('#fancybox-content').css('border-color', fancyboxBlockUI.m_borderColor);
+									$('#fancybox-outer').css('background-color', fancyboxBlockUI.m_backgroundColor);
+
 									if (fancyboxBlockUI.m_html) {
 									
 										$.fancybox(fancyboxBlockUI.m_html, defaults);									
@@ -266,7 +269,8 @@ Extended usage with parameters:
 					
 					unblockUI: function(){
 					
-							$.fancybox.close();
+							
+							this.close();
 							//$('#fancybox-outer').show();
 	
 					} // end unblockUI

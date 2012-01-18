@@ -19,22 +19,7 @@
 		
 		
 
-			var defaults = {
 
-       		'autoDimensions'	: false,
-			'height'     		: 'none',
-			'width'				: 'none',
-			'transitionIn'		: 'none',
-			'transitionOut'		: 'none',
-			'hideOnContentClick': false,
-			'hideOnOverlayClick': true,
-			'transitionIn'		: 'none',
-			'transitionOut'		: 'none',
-			'centerOnScroll'	: true,
-			'enableEscapeButton': false,
-
-		}
-		
 		//$('#fancybox-outer').hide();
 		//$.fancybox('<div style="background-color:red">ERROR OCCURRED</div>', defaults);
 		
@@ -56,6 +41,7 @@
 			$('#b1').click(function(){
 			
 				$.fancybox.blockUI({timeout: 5000, onClosed: myfunc});
+				
 			});				
 
 			$('#b2').click(function(){
@@ -108,7 +94,7 @@
 			
 			$('#b11').click(function(){
 			
-				$.fancybox.blockUI({'messageType':'info', 'html':'simple warning to tell you what to do. Please try after sometime or contact support'});
+				$.fancybox.blockUI({messageType:'warning', 'html':'simple warning to tell you what to do. Please try after sometime or contact support'});
 			});	
 
 		});
