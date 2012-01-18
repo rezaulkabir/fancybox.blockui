@@ -11,10 +11,10 @@
 
 	<script type="text/javascript" src="a.js"></script> 
 
+<style type="text/css"></style>
 	<script type="text/javascript">
 
-		
-		
+
 		$(document).ready(function() { 
 		
 		
@@ -98,8 +98,18 @@
 
 			$('#b9').click(function(){
 			
-				$.fancybox.blockUI({'fancyboxContent': '<h2>HEADER</h2><p><div style="background-color:red">ERROR OCCURRED</div><button onclick="$.fancybox.close();">close</button></p>', showCloseButton:false});
+				$.fancybox.blockUI({'html': '<h2>HEADER</h2><p><div style="background-color:red">ERROR OCCURRED</div><button onclick="$.fancybox.close();">close</button></p>', showCloseButton:false});
 			});		
+			
+			$('#b10').click(function(){
+			
+				$.fancybox.blockUI({'html': '<h2>HEADER</h2><p><div>ERROR OCCURRED</div><button onclick="$.fancybox.close();">close</button></p>', showCloseButton:false, 'backgroundColor':'blue', 'borderColor':'red'});
+			});	
+			
+			$('#b11').click(function(){
+			
+				$.fancybox.blockUI({'messageType':'warning', 'html':'simple warning to tell you what to do', 'width':200, 'height':200});
+			});	
 
 		});
 	
@@ -130,6 +140,9 @@ input {display: block; width: 530px; height: 40px; margin-bottom: 10px;}
 
 			<input id="b8" type="button" value="Hide on click and show message with default close button"></input>
 			<input id="b9" type="button" value="Hide on click and show message with custom close button"></input>
+
+			<input id="b10" type="button" value="Hide on click and show message with custom close button with colored box"></input>
+			<input id="b11" type="button" value="Info dialog"></input>
 
 
 		</div>
