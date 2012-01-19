@@ -122,7 +122,7 @@ Extended usage with parameters:
 					},
 					onClosed: function() {
 					
-									console.log('[onClosed]');
+									console.log('[unblockUI.onClosed]');
 									$.fancybox.hideActivity();
 
 									if (fancyboxBlockUI.timeoutId) {
@@ -219,7 +219,6 @@ Extended usage with parameters:
 									}
 									
 									
-									console.log('[blockUI] html:' + fancyboxBlockUI.m_html);
 									if (!fancyboxBlockUI.m_html) {
 										
 										$('#fancybox-outer').hide();
@@ -269,8 +268,10 @@ Extended usage with parameters:
 					
 					unblockUI: function(){
 					
-							
-							this.close();
+							infoLog('[unblockUI]');	
+							//$.fancybox.cancel();
+							$.fancybox.close();
+													
 							//$('#fancybox-outer').show();
 	
 					} // end unblockUI
